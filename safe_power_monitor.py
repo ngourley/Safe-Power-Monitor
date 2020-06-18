@@ -40,10 +40,12 @@ def log(code, message):
     # If the log file doesn't exist, create it
     if os.path.isfile(logFile) is False:
       open(logFile, "w")
-
+    message = datetime.now().strftime("%Y-%m-%d %H:%M:%S") + " [" + str(code) + "] " + message + "\n"
     file = open(logFile, "a")
-    file.write(datetime.now().strftime("%Y-%m-%d %H:%M:%S") + " [" + str(code) + "] " + message + "\n")
+    file.write(message)
     file.close()
+  print message
+  
 
 class GpioWatcher(object):
   def __init__(self, gpio_pin, internal_pull, trigger_state):
